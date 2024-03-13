@@ -22,36 +22,17 @@
   <body class="page">
     <header class="header">
       <img src="./img/header__logo.svg" alt="логотип компании Person Manage" />
-      <p class="header__time">2024, February 18</p>
+      <p class="header__time" id="date-active"></p>
       <div class="header__ring"></div>
     </header>
     <main class="main">
       <section class="member">
         <h1 class="member__header">Project members</h1>
-        <p class="member__total">
-          Total: <span class="member__total-bold">5</span>
+        <p class="member__total" id="counter">
+          Total: <span class="member__total-bold" id="count"></span>
         </p>
         <ul id="user-list">
-          <li class="member__person member__person_active">
-            <div class="member__info">
-              <div class="member__picture"></div>
-              <div class="member__about">
-                <p class="member__title"></p>
-                <p class="member__email"></p>
-              </div>
-            </div>
-            <button class="member__delete member__delete_none"></button>
-          </li>
-          <!-- <li class="member__person">
-            <div class="member__info">
-              <div class="member__picture"></div>
-              <div class="member__about">
-                <p class="member__title">Иван Иванов</p>
-                <p class="member__email">ivanivanov@pm.com</p>
-              </div>
-            </div>
-            <div class="member__delete"></div>
-          </li> -->
+
         </ul>
         <button class="member__add">Add member</button>
       </section>
@@ -137,27 +118,34 @@
             <label>
               <span class="form__label">ФИО</span>
               <input
-                id="name"
                 type="text"
-                class="form__input"
+                name="name"
+                id="name"
                 placeholder="Введите ФИО"
+                class="form__input"
                 minlength="2"
                 maxlength="50"
                 required
               />
+              <span class="form__input-error" id="name-error"></span>
             </label>
             <label>
               <span class="form__label">Дата рождения</span>
               <input
+                name="birthDay"
+                id="birthDay"
                 type="text"
                 class="form__input"
-                placeholder="Введите дату рождения"
+                placeholder="Введите дату рождения (формат: дд.мм.гггг)"
                 required
               />
+              <span class="form__input-error" id="birthDay-error"></span>
             </label>
             <label>
               <span class="form__label">Электронная почта</span>
               <input
+                name="email"
+                id="email"
                 type="email"
                 class="form__input"
                 placeholder="Введите email адрес сотрудника"
@@ -165,10 +153,13 @@
                 maxlength="50"
                 required
               />
+              <span class="form__input-error" id="email-error"></span>
             </label>
             <label>
               <span class="form__label">Должность</span>
               <input
+                name="job"
+                id="job"
                 type="text"
                 class="form__input"
                 placeholder="Введите должность сотрудника"
@@ -176,10 +167,13 @@
                 maxlength="50"
                 required
               />
+              <span class="form__input-error" id="job-error"></span>
             </label>
             <label>
               <span class="form__label">Зарплата</span>
               <input
+                name="salary"
+                id="salary"
                 type="text"
                 class="form__input"
                 placeholder="Введите заработную плату сотдруника"
@@ -187,17 +181,21 @@
                 maxlength="50"
                 required
               />
+              <span class="form__input-error" id="salary-error"></span>
             </label>
             <label>
               <span class="form__label">Опыт работы</span>
               <input
+                name="experience"
+                id="experience"
                 type="text"
                 class="form__input"
                 placeholder="Введите трудовой стаж сотрудника"
-                minlength="2"
+                minlength="1"
                 maxlength="50"
                 required
               />
+              <span class="form__input-error" id="experience-error"></span>
             </label>
             <button type="submit" class="popup__button">Add member</button>
           </form>

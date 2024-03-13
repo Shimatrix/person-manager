@@ -4,19 +4,17 @@
   font-family: inherit;
   font-weight: 400;
   padding-left: 16px;
-  border: 1px solid #0377C5;
+  border: 1px solid #0377c5;
   border-radius: 5px;
   width: 530px;
   height: 41px;
-  color: #0377C5;
-  margin-bottom: 20px;
+  color: #0377c5;
+  margin-bottom: 5px;
 }
-
 .form__input::placeholder {
-  color: #0377C5;
-  opacity: .6;
+  color: #0377c5;
+  opacity: 0.6;
 }
-
 .form__input:focus {
-  outline-color: #0098FF;
+  outline-color: #0098ff;
 }

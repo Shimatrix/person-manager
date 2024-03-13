@@ -1,73 +1,80 @@
-import { Modal, UserPrewiew, UserFullInfo } from "./components/common";
-import { defaultUser } from "./cosntants/constants";
-import { Clock } from "./components/clock";
+import { Popup } from "./components/Popup";
+import { Clock } from "./components/Clock";
+import { Counter } from "./components/Counter";
+import { User } from "./components/User";
+import { IUser, IValidation } from "./types/types";
+import { initialUsers } from "./cosntants/constants";
+import { Validation } from "./components/validation";
 
-//работа модалки
-const button = document.querySelector(".member__add");
-const popup = document.querySelector(".popup");
-
-if (popup instanceof HTMLElement) {
-  const modalka = new Modal(popup);
-  button?.addEventListener("click", () => {
-    modalka.open();
-  });
-} else {
-  console.error("Ошибка: переменная popup не является HTMLElement.");
+//валидация
+const form = document.querySelector<HTMLFormElement>('.form');
+const formValidationConfig: IValidation = {
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.popup__button',
+  inActiveButtonClass: 'popup__button_type_disabled',
+  inputErrorClass: 'form__input_type_error'
 }
 
-//заполнить превью слева
-const createDefaultUserPreview = new UserPrewiew(defaultUser.name, defaultUser.email);
-const getInfoPreview = createDefaultUserPreview.getUserInfoForPrewiew();
-const memberTitle: HTMLParagraphElement | null = document.querySelector(".member__title");
-const memberEmail: HTMLParagraphElement | null = document.querySelector(".member__email");
+//инстансы
+new Clock('time-active', 'date-active');
+const popup = new Popup('.popup');
+const counter = new Counter('counter', 'user-list');
+const validation = new Validation(formValidationConfig, form as HTMLFormElement);
 
-if (memberTitle && memberEmail) {
-  memberTitle.textContent = createDefaultUserPreview.changeName(getInfoPreview.name);
-  memberEmail.textContent = getInfoPreview.email;
-} else {
-  console.log("Ошибка: не найдено поле имени или емейла");
-}
+//константы
+const addMember = document.querySelector<HTMLButtonElement>('.member__add');
+const usersList = document.querySelector<HTMLElement>('#user-list');
+const infoUserUp = Array.from(document.querySelectorAll(".info__text")) as HTMLElement[]; //6 полей
+const infoUserUnder = Array.from(document.querySelectorAll(".info2__subtitle")) as HTMLElement[]; //3 поля
 
-//заполнить 6 полей
-const createDefaultUserFullInfo = new UserFullInfo(
-    defaultUser.name, defaultUser.email, defaultUser.birthDay, defaultUser.job, defaultUser.salary, defaultUser.experience
-);
-const infoFullText = Array.from(document.querySelectorAll(".info__text")) as HTMLElement[];
+//методы инстансов
+popup.setEventListener();
+counter.updateCounter();
+validation.enableValidation();
 
-const labels = [
-  `${createDefaultUserFullInfo.name}`,
-  `${createDefaultUserFullInfo.calculateAge(createDefaultUserFullInfo.birthDay)}`,
-  `${createDefaultUserFullInfo.job}`,
-  `${createDefaultUserFullInfo.experience}`,
-  `15 октября 2029`,
-  `${(createDefaultUserFullInfo.experience / 10) * createDefaultUserFullInfo.calculateAge(createDefaultUserFullInfo.birthDay)}%`,
-];
-
-infoFullText.forEach((item, index) => {
-  item.textContent = labels[index];
+//слушатели
+addMember?.addEventListener('click', () => {
+    popup.open();
 });
 
-//заполнить 3 поля
-const getUnderInfo = Array.from(document.querySelectorAll(".info2__subtitle")) as HTMLElement[];
 
-const underLabels = [
-    `MSC`,
-    `${createDefaultUserFullInfo.calculateBirthDay(createDefaultUserFullInfo.birthDay)}`,
-    `${createDefaultUserFullInfo.salary}`
-]
+//функции
+const createNewUser = (data: IUser) => {
+  const user = new User(data, '#user-card', infoUserUp, infoUserUnder);
+  return user.createCardUser();
+}
 
-getUnderInfo.forEach((item, index) => {
-    item.textContent = underLabels[index];
-  });
+const addInitialCards = (data: IUser) => {
+    const cardElement = createNewUser(data);
+    if (usersList) {
+        usersList.append(cardElement);
+    }
+}
 
-//активное время на странице
-new Clock('time-active');
+initialUsers.forEach((user) => {
+  addInitialCards(user);
+});
 
-// const userList = document.querySelector('#user-list');
-// const cardUser = createDefaultUserFullInfo.createCardUser() as HTMLElement;
-// userList?.append(cardUser)
+const addUserWithForm = (data: IUser) => {
+    const cardElement = createNewUser(data);
+    if (usersList) {
+        usersList.append(cardElement);
+    }
+}
 
-// const nastya = new UserFullInfo('SHLUHA', 'SHLUHA@gmal.nahui', '21.11.1111', 'PUTANA', 112331, 1)
-// const newNastya = nastya.createCardUser() as HTMLElement;
-// userList?.append(newNastya)
-
+form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+    const userData = {
+        name: formData.get('name') as string,
+        birthDay: formData.get('birthDay') as string,
+        email: formData.get('email') as string,
+        job: formData.get('job') as string,
+        salary: parseInt(formData.get('salary') as string),
+        experience: parseInt(formData.get('experience') as string)
+    }
+    addUserWithForm(userData);
+    popup.close();
+    form.reset();
+});

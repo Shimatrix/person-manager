@@ -1,25 +1,43 @@
-export class Clock {
-    private element: HTMLElement;
+import { IClock } from "../types/types";
 
-    constructor(elementId: string) {
-        const element = document.getElementById(elementId);
-        if (!element) {
-            throw new Error(`Элемент с ID ${elementId} не найден`);
+export class Clock implements IClock {
+    timeElement: HTMLElement;
+    dateElement: HTMLElement;
+
+    constructor(timeElementId: string, dateElementId: string) {
+        const timeElement = document.getElementById(timeElementId);
+        const dateElement = document.getElementById(dateElementId);
+        
+        if (!timeElement || !dateElement) {
+            throw new Error(`Элемент с ID ${timeElementId} или ${dateElementId} не найден`);
         }
-        this.element = element;
-        this.updateTime(); // метод updateTime для первоначального обновления времени
-        setInterval(() => this.updateTime(), 1000); // устанавливается интервал с помощью функции setInterval, которая будет вызывать метод updateTime каждую секунду
+
+        this.timeElement = timeElement;
+        this.dateElement = dateElement;
+        
+        setInterval(() => {
+            this.updateTime();
+            this.updateDate(); // обновляем дату каждую секунду
+        }, 1000); // устанавливается интервал с помощью функции setInterval, которая будет вызывать метод updateTime и метод updateDate каждую секунду
     }
 
-    private updateTime(): void {
+    updateTime(): void {
         const now: Date = new Date();
         const hours: string = this.formatTime(now.getHours());
         const minutes: string = this.formatTime(now.getMinutes());
         const seconds: string = this.formatTime(now.getSeconds());
-        this.element.textContent = `${hours}:${minutes}:${seconds}`;
+        this.timeElement.textContent = `${hours}:${minutes}:${seconds}`;
     }
 
-    private formatTime(time: number): string {
+    updateDate(): void {
+        const now: Date = new Date();
+        const year: number = now.getFullYear();
+        const month: string = now.toLocaleString('en-US', { month: 'long' });
+        const day: string = this.formatTime(now.getDate());
+        this.dateElement.textContent = `${year} ${month} ${day}`;
+    }
+
+    formatTime(time: number): string {
         return time < 10 ? `0${time}` : time.toString();
     }
 }
