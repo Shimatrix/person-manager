@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "gh-pages": "^6.1.1",
     "html-webpack-plugin": "^5.6.0",
     "ts-loader": "^9.5.1",
     "typescript": "^5.3.3",
@@ -9,6 +10,7 @@
   },
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "start": "webpack-dev-server --open"
+    "start": "webpack-dev-server --open",
+    "deploy": "gh-pages -d dist"
   }
 }
