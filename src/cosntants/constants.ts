@@ -11,7 +11,7 @@ export const initialUsers: IUser[] = [
     },
     {
         name: 'Петров Петя Петрович',
-        birthDay: '03.11.1983',
+        birthDay: '13.04.1995',
         job: 'Product manager',
         salary: 150000,
         experience: 3,

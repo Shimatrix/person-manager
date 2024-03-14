@@ -1,6 +1,6 @@
 import './blocks/pages/style.css';
 import { Popup } from "./components/Popup";
-import { Clock } from "./components/Clock";
+import { Clock } from "./components/clock";
 import { Counter } from "./components/Counter";
 import { User } from "./components/User";
 import { IUser, IValidation } from "./types/types";
