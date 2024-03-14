@@ -10,6 +10,16 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/blocks/pages/style.css":
+/*!************************************!*\
+  !*** ./src/blocks/pages/style.css ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack:///./src/blocks/pages/style.css?");
+
+/***/ }),
+
 /***/ "./src/components/Clock.ts":
 /*!*********************************!*\
   !*** ./src/components/Clock.ts ***!
@@ -50,6 +60,16 @@ eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexpo
 
 /***/ }),
 
+/***/ "./src/components/validation.ts":
+/*!**************************************!*\
+  !*** ./src/components/validation.ts ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.Validation = void 0;\nclass Validation {\n    constructor(config, form) {\n        this.config = config;\n        this.form = form;\n        this.submitButton = this.form.querySelector(this.config.submitButtonSelector);\n        this.inputList = Array.from(this.form.querySelectorAll(this.config.inputSelector));\n    }\n    showError(input, errorMessage) {\n        input.classList.add(this.config.inputErrorClass);\n        const errorElement = this.form.querySelector(`#${input.id}-error`);\n        if (errorElement) {\n            errorElement.textContent = errorMessage;\n        }\n    }\n    hideError(input) {\n        input.classList.remove(this.config.inputErrorClass);\n        const errorElement = this.form.querySelector(`#${input.id}-error`);\n        if (errorElement) {\n            errorElement.textContent = '';\n        }\n    }\n    checkInputValidity(input) {\n        if (!input.validity.valid) {\n            this.showError(input, input.validationMessage);\n        }\n        else {\n            this.hideError(input);\n        }\n    }\n    enableSubmitButton() {\n        this.submitButton.classList.remove(this.config.inActiveButtonClass);\n        this.submitButton.disabled = false;\n    }\n    disableSubmitButton() {\n        this.submitButton.classList.add(this.config.inActiveButtonClass);\n        this.submitButton.disabled = true;\n    }\n    toggleButtonState() {\n        const allInputsValid = this.inputList.every((input) => input.validity.valid);\n        if (allInputsValid) {\n            this.enableSubmitButton();\n        }\n        else {\n            this.disableSubmitButton();\n        }\n    }\n    setEventListener() {\n        this.inputList.forEach((input) => {\n            input.addEventListener('input', () => {\n                this.checkInputValidity(input);\n                this.toggleButtonState();\n            });\n        });\n    }\n    enableValidation() {\n        this.form.addEventListener('submit', (event) => {\n            event.preventDefault();\n            this.toggleButtonState();\n        });\n        this.form.addEventListener('reset', () => {\n            this.inputList.forEach((input) => {\n                this.hideError(input);\n            });\n            this.disableSubmitButton();\n        });\n        this.setEventListener();\n        this.toggleButtonState();\n    }\n}\nexports.Validation = Validation;\n\n\n//# sourceURL=webpack:///./src/components/validation.ts?");
+
+/***/ }),
+
 /***/ "./src/cosntants/constants.ts":
 /*!************************************!*\
   !*** ./src/cosntants/constants.ts ***!
@@ -66,7 +86,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexpo
   \**********************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst Popup_1 = __webpack_require__(/*! ./components/Popup */ \"./src/components/Popup.ts\");\nconst Clock_1 = __webpack_require__(/*! ./components/Clock */ \"./src/components/Clock.ts\");\nconst Counter_1 = __webpack_require__(/*! ./components/Counter */ \"./src/components/Counter.ts\");\nconst User_1 = __webpack_require__(/*! ./components/User */ \"./src/components/User.ts\");\nconst constants_1 = __webpack_require__(/*! ./cosntants/constants */ \"./src/cosntants/constants.ts\");\n//инстансы\nnew Clock_1.Clock('time-active', 'date-active');\nconst popup = new Popup_1.Popup('.popup');\nconst counter = new Counter_1.Counter('counter', 'user-list');\n//переменные\nconst addMember = document.querySelector('.member__add');\nconst usersList = document.querySelector('#user-list');\nconst infoUserUp = Array.from(document.querySelectorAll(\".info__text\")); //6 полей\nconst infoUserUnder = Array.from(document.querySelectorAll(\".info2__subtitle\")); //3 поля\n//методы инстансов\npopup.setEventListener();\ncounter.updateCounter();\n//слушатели\naddMember === null || addMember === void 0 ? void 0 : addMember.addEventListener('click', () => {\n    popup.open();\n});\n//функции\nconst createNewUser = (data) => {\n    const user = new User_1.User(data, '#user-card', infoUserUp, infoUserUnder);\n    return user.createCardUser();\n};\nconst addInitialCards = (data) => {\n    const cardElement = createNewUser(data);\n    if (usersList) {\n        usersList.append(cardElement);\n    }\n};\nconstants_1.initialUsers.forEach((user) => {\n    addInitialCards(user);\n});\n// import { Modal, UserPrewiew, UserFullInfo } from './components/common';\n// import { usersInfo } from \"./cosntants/constants\";\n// import { Clock } from \"./components/clock\";\n// import { UserManager } from \"./components/addUser\";\n// //работа модалки\n// const button = document.querySelector(\".member__add\");\n// const popup = document.querySelector(\".popup\");\n// if (popup instanceof HTMLElement) {\n//   const modalka = new Modal(popup);\n//   button?.addEventListener(\"click\", () => {\n//     modalka.open();\n//   });\n// } else {\n//   console.error(\"Ошибка: переменная popup не является HTMLElement.\");\n// }\n// let cardCount = 0; // Создаем переменную для счетчика карточек\n// //заполнить инфу\n// usersInfo.forEach((obj) => {\n//     const user = new UserPrewiew(obj.name, obj.email);\n//     const cardUser = user.createCardUser() // Создаем карточку пользователя\n//     const changeUser = new UserFullInfo(obj.name, obj.email, obj.birthDay, obj.job, obj.salary, obj.experience);\n//     const counter = document.querySelector('.member__total-bold');\n//     if (cardUser) {\n//         user.setEventListener(cardUser, changeUser); // Устанавливаем обработчики на клик и на удаление карточки\n//         document.querySelector('#user-list')?.append(cardUser); // Добавляем карточку пользователя на страницу\n//         cardCount++;\n//     } else {\n//         console.log('Не нашлись элементы member__title и member__email')\n//     }\n//     if (counter) {\n//       counter.textContent = cardCount.toString(); // Обновляем количество карточек пользователей\n//     }\n// });\n// //активное время на странице\n// new Clock('time-active', 'date-active');\n// const form = document.querySelector('.form');\n// if (form) {\n//     form.addEventListener('submit', (event) => {\n//         event.preventDefault(); // Предотвращаем стандартное поведение отправки формы\n//         UserManager.addUser(form as HTMLFormElement);\n//     });\n// }\n\n\n//# sourceURL=webpack:///./src/index.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\n__webpack_require__(/*! ./blocks/pages/style.css */ \"./src/blocks/pages/style.css\");\nconst Popup_1 = __webpack_require__(/*! ./components/Popup */ \"./src/components/Popup.ts\");\nconst Clock_1 = __webpack_require__(/*! ./components/Clock */ \"./src/components/Clock.ts\");\nconst Counter_1 = __webpack_require__(/*! ./components/Counter */ \"./src/components/Counter.ts\");\nconst User_1 = __webpack_require__(/*! ./components/User */ \"./src/components/User.ts\");\nconst constants_1 = __webpack_require__(/*! ./cosntants/constants */ \"./src/cosntants/constants.ts\");\nconst validation_1 = __webpack_require__(/*! ./components/validation */ \"./src/components/validation.ts\");\n//валидация\nconst form = document.querySelector('.form');\nconst formValidationConfig = {\n    formSelector: '.form',\n    inputSelector: '.form__input',\n    submitButtonSelector: '.popup__button',\n    inActiveButtonClass: 'popup__button_type_disabled',\n    inputErrorClass: 'form__input_type_error'\n};\n//инстансы\nnew Clock_1.Clock('time-active', 'date-active');\nconst popup = new Popup_1.Popup('.popup');\nconst counter = new Counter_1.Counter('counter', 'user-list');\nconst validation = new validation_1.Validation(formValidationConfig, form);\n//константы\nconst addMember = document.querySelector('.member__add');\nconst usersList = document.querySelector('#user-list');\nconst infoUserUp = Array.from(document.querySelectorAll(\".info__text\")); //6 полей\nconst infoUserUnder = Array.from(document.querySelectorAll(\".info2__subtitle\")); //3 поля\n//методы инстансов\npopup.setEventListener();\ncounter.updateCounter();\nvalidation.enableValidation();\n//слушатели\naddMember === null || addMember === void 0 ? void 0 : addMember.addEventListener('click', () => {\n    popup.open();\n});\n//функции\nconst createNewUser = (data) => {\n    const user = new User_1.User(data, '#user-card', infoUserUp, infoUserUnder);\n    return user.createCardUser();\n};\nconst addInitialCards = (data) => {\n    const cardElement = createNewUser(data);\n    if (usersList) {\n        usersList.append(cardElement);\n    }\n};\nconstants_1.initialUsers.forEach((user) => {\n    addInitialCards(user);\n});\nconst addUserWithForm = (data) => {\n    const cardElement = createNewUser(data);\n    if (usersList) {\n        usersList.append(cardElement);\n    }\n};\nform === null || form === void 0 ? void 0 : form.addEventListener('submit', (event) => {\n    event.preventDefault();\n    const formData = new FormData(form);\n    const userData = {\n        name: formData.get('name'),\n        birthDay: formData.get('birthDay'),\n        email: formData.get('email'),\n        job: formData.get('job'),\n        salary: parseInt(formData.get('salary')),\n        experience: parseInt(formData.get('experience'))\n    };\n    addUserWithForm(userData);\n    popup.close();\n    form.reset();\n});\n\n\n//# sourceURL=webpack:///./src/index.ts?");
 
 /***/ })
 
@@ -95,6 +115,18 @@ eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\ncons
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
 /******/ 	
 /************************************************************************/
 /******/ 	
