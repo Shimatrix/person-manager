@@ -1,3 +1,4 @@
+import './blocks/pages/style.css';
 import { Popup } from "./components/Popup";
 import { Clock } from "./components/Clock";
 import { Counter } from "./components/Counter";
