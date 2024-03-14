@@ -308,6 +308,29 @@ li {
   font-size: 16px;
   color: #0377C5;
 }
+/*!*********************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/blocks/about/__placeholder/about__placeholder.css ***!
+  \*********************************************************************************************************/
+.about__placeholder {
+    display: block;
+    position: absolute;
+    background-color: #EEF7FF;
+    height: 100%;
+    z-index: 1;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 32px;
+    color: #0377C5;
+    padding: 25%;
+}
+/*!****************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/blocks/about/__placeholder/_disabled/about__placeholder_disabled.css ***!
+  \****************************************************************************************************************************/
+.about__placeholder_disabled {
+    display: none;
+}
 /*!******************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/blocks/about/about.css ***!
   \******************************************************************************/
@@ -598,6 +621,8 @@ li {
   \******************************************************************************/
 .popup {
   display: none;
+  position: fixed;
+  z-index: 3;
 }
 /*!*****************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/blocks/popup/_open/popup_open.css ***!
