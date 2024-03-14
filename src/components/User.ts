@@ -11,9 +11,10 @@ export class User implements IUser {
     private _element: HTMLElement | null = null;
     private _infoUserUp: HTMLElement[] = [];
     private _infoUserUnder: HTMLElement[] = [];
+    private _placeholder: HTMLElement | null = null;
     static activeUser: HTMLElement | null = null; // Статическое свойство для отслеживания текущего активного пользователя
 
-    constructor(data: IUser, templateId: string, _infoUserUp: HTMLElement[], _infoUserUnder: HTMLElement[]) {
+    constructor(data: IUser, templateId: string, _infoUserUp: HTMLElement[], _infoUserUnder: HTMLElement[], _placeholder: HTMLElement) {
         this.name = data.name;
         this.email = data.email;
         this.birthDay = data.birthDay;
@@ -23,6 +24,7 @@ export class User implements IUser {
         this.templateId = templateId;
         this._infoUserUp = _infoUserUp;
         this._infoUserUnder = _infoUserUnder;
+        this._placeholder = _placeholder;
     }
 
     getTemplate(): HTMLElement {
@@ -61,6 +63,7 @@ export class User implements IUser {
             selected.classList.add('member__person_active');
             User.activeUser = selected;
             this.refreshInfoUser();
+            this._placeholder?.classList.add('about__placeholder_disabled');
         }
     }
 
@@ -70,6 +73,7 @@ export class User implements IUser {
         }
         this._element.remove();
         this.clearUserInfo();
+        this._placeholder?.classList.remove('about__placeholder_disabled');
     }
 
     private clearUserInfo(): void {

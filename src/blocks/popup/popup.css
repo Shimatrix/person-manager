@@ -7,4 +7,6 @@
 
 .popup {
   display: none;
+  position: fixed;
+  z-index: 3;
 }

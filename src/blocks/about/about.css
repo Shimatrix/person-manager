@@ -5,6 +5,8 @@
 @import url(./__item/about__item.css);
 @import url(./__item-title/about__item-title.css);
 @import url(./__item-subtitle/about__item-subtitle.css);
+@import url(./__placeholder/about__placeholder.css);
+@import url(./__placeholder/_disabled/about__placeholder_disabled.css);
 
 .about {
   display: flex;

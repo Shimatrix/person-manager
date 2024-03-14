@@ -1,0 +1,14 @@
+.about__placeholder {
+    display: block;
+    position: absolute;
+    background-color: #EEF7FF;
+    height: 100%;
+    z-index: 1;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 32px;
+    color: #0377C5;
+    padding: 25%;
+}

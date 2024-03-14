@@ -28,6 +28,7 @@ const addMember = document.querySelector<HTMLButtonElement>('.member__add');
 const usersList = document.querySelector<HTMLElement>('#user-list');
 const infoUserUp = Array.from(document.querySelectorAll(".info__text")) as HTMLElement[]; //6 полей
 const infoUserUnder = Array.from(document.querySelectorAll(".info2__subtitle")) as HTMLElement[]; //3 поля
+const placeholder = document.querySelector('.about__placeholder') as HTMLElement;
 
 //методы инстансов
 popup.setEventListener();
@@ -42,7 +43,7 @@ addMember?.addEventListener('click', () => {
 
 //функции
 const createNewUser = (data: IUser) => {
-  const user = new User(data, '#user-card', infoUserUp, infoUserUnder);
+  const user = new User(data, '#user-card', infoUserUp, infoUserUnder, placeholder);
   return user.createCardUser();
 }
 
