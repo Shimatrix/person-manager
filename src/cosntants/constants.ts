@@ -7,7 +7,7 @@ export const initialUsers: IUser[] = [
         job: 'CEO проекта.',
         salary: 250000,
         experience: 5,
-        email: 'myEmail@gmail.com'
+        email: 'ivanov@gmail.com'
     },
     {
         name: 'Петров Петя Петрович',
@@ -18,11 +18,11 @@ export const initialUsers: IUser[] = [
         email: 'petya@gmail.com'
     },
     {
-        name: 'Чеблять Коля Петрович',
+        name: 'Сидоров Коля Иванович',
         birthDay: '03.11.1991',
         job: 'developer',
         salary: 120000,
         experience: 1,
-        email: 'petya@gmail.com'
+        email: 'nikolay@gmail.com'
     }
 ]
